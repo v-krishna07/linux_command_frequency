@@ -13,12 +13,14 @@ void cond(FILE *f){
 
 void inp(FILE *f,FILE *f_w){
     // int index;
-    char ch=fgetc(f);;
-    while(ch!=EOF){
-        fputc(ch,f_w);
-        ch=fgetc(f);
-        // printf("%c",ch);
+    char ch[256];
+    while(fgets(ch,sizeof(ch),f)!=NULL){
+        char *cmd = strtok(ch," \n");
+        if (cmd!=NULL){
+            printf("%s\n",cmd);
+        }
     }
+
 }
 
 
