@@ -16,7 +16,7 @@ typedef struct{
     int index;
 }items;
 
-void inp(FILE *f,FILE *f_w){
+void inp(FILE *f){
     // int index;
     char ch[256];
     // char arr[10000][256];
@@ -39,13 +39,20 @@ void inp(FILE *f,FILE *f_w){
                 list[i].index = 1;
                 i++;
             }
-        }
+        }   
     }
     for(int l=0;l<i;l++){
-        printf("index:%d,name:%s\n",list[l].index,list[l].item);
+        for(int m=0;m<i-1;m++){
+            if(list[m].index<list[m+1].index){
+                items temp = list[m];
+                list[m] = list[m+1];
+                list[m+1] = temp;
+            }
+        }
     }
-    // printf("found:%d",found);
-
+    for(int k=0;k<10&&k<i;k++){
+        printf("%s --> number of times:%d\n",list[k].item,list[k].index);
+    }
 }
 
 
@@ -61,9 +68,7 @@ int main(){
     snprintf(loc,sizeof(loc),"%s/%s/%s",us,usr,us1);
     printf("%s",loc);
     FILE *f =  fopen(loc,"r");
-    FILE *f_w = fopen("freq.txt","w");
     cond(f);
-    inp(f,f_w);
+    inp(f);
     fclose(f);
-    fclose(f_w);
 }
