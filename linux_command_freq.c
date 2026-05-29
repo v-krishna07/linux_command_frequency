@@ -6,9 +6,6 @@ void cond(FILE *f){
         printf("\nError in finding the file...\n");
         exit(0);
     }
-    else{
-        printf("\nFile found successfully\n");
-    }
 }
 
 typedef struct{
@@ -51,21 +48,12 @@ void inp(FILE *f){
         }
     }
     for(int k=0;k<10&&k<i;k++){
-        printf("%s --> number of times:%d\n",list[k].item,list[k].index);
+        printf("\n%s --> number of times:%d\n",list[k].item,list[k].index);
     }
 }
-
-
-
 int main(){
-    char usr[50];
-    printf("Please enter you username...:");
-    fgets(usr,sizeof(usr),stdin);
-    usr[strcspn(usr,"\n")]=0;
     char loc[100];
-    char us[]="/home";
-    char us1[]= ".bash_history";
-    snprintf(loc,sizeof(loc),"%s/%s/%s",us,usr,us1);
+    snprintf(loc,sizeof(loc),"%s/.bash_history",getenv("HOME"));
     printf("%s",loc);
     FILE *f =  fopen(loc,"r");
     cond(f);
