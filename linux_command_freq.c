@@ -11,15 +11,40 @@ void cond(FILE *f){
     }
 }
 
+typedef struct{
+    char item[256];
+    int index;
+}items;
+
 void inp(FILE *f,FILE *f_w){
     // int index;
     char ch[256];
+    // char arr[10000][256];
+    items list[1000];
+    int i=0;
+    
     while(fgets(ch,sizeof(ch),f)!=NULL){
+        int found =0;
         char *cmd = strtok(ch," \n");
         if (cmd!=NULL){
-            printf("%s\n",cmd);
+            for(int j=0;j<i;j++){
+                if(strcmp(list[j].item,cmd)==0){
+                    list[j].index++;
+                    found++;
+                }
+            }
+
+            if (found == 0) {
+                strcpy(list[i].item, cmd);
+                list[i].index = 1;
+                i++;
+            }
         }
     }
+    for(int l=0;l<i;l++){
+        printf("index:%d,name:%s\n",list[l].index,list[l].item);
+    }
+    // printf("found:%d",found);
 
 }
 
